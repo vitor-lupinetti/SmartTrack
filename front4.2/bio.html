@@ -1,13 +1,36 @@
 <!dOCTYPE html>
 <head>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/bootstrap-4.3.1.min.css" />
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,600">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700">
 </head>
 <body>
-    <h1 class="titulo-principal">Sobre o projeto</h1>
+    
+
+    <header class="sticky-top">
+        <h1 class="titulo-principal">Sobre o projeto</h1>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav">
+                    <li class="nav-item">
+                            <a href="index.html" class="nav-link trocar_pagina text-light" id="conteudo_consultar.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="projeto.html" class="nav-link trocar_pagina text-light" id="conteudo_tempo_real.html">Projeto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link trocar_pagina text-light" id="conteudo_simulador.html">Contato</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     <div class="sobre">
         <h3>Objetivo</h3>
         <p> Este projeto tem por objetivo informar ao usuário a localização e a lotação de um ônibus 
