@@ -194,13 +194,15 @@ function Buscar(){
   console.log(bus);
   var xhr = new XMLHttpRequest();
   //xhr.open("GET", "http://18.221.146.148:1026/v2/entities/urn:ngsi-ld:mobilephone:");
+
   if(bus == '431'){
-  xhr.open("GET", "http://52.14.14.140:1026/v2/entities/urn:ngsi-ld:431");
-}
-else{
-  alert("Ônibus não cadastrado ainda..");
-  return;
-}
+    xhr.open("GET", "http://52.14.14.140:1026/v2/entities/urn:ngsi-ld:431");
+    document.getElementById('info-bus').textContent = "431";
+  }
+  else{
+    alert("Ônibus não cadastrado ainda..");
+    return;
+  }
 
   xhr.addEventListener("load", function() {
     var resposta = xhr.responseText;
@@ -228,8 +230,52 @@ else{
         // alert(point.duration.text);
       }
    });
-    document.getElementById('info-bus').textContent = "409";
+    
     document.getElementById('info-qtd').textContent = bus.quantidade.value;
+    CalculaDistancia(pos2, local);
   });           
   xhr.send(); 
+  
 }
+
+function CalculaDistancia(pos2, local) {
+  //$('#litResultado').html('Aguarde...');
+  //Instanciar o DistanceMatrixService
+  var service = new google.maps.DistanceMatrixService();
+  //executar o DistanceMatrixService
+  var origem = {lat: local[0], lng:local[1]};
+  var destino = {lat: pos2[0], lng:pos2[1]};
+  service.getDistanceMatrix(
+    {
+        //Origem
+        origins:[origem, origem], // origem
+        destinations:[destino, destino],
+        //Modo (DRIVING | WALKING | BICYCLING)
+        travelMode: google.maps.TravelMode.DRIVING,
+        //Sistema de medida (METRIC | IMPERIAL)
+        unitSystem: google.maps.UnitSystem.METRIC
+        //Vai chamar o callback
+    }, callback);
+}
+//Tratar o retorno do DistanceMatrixService
+function callback(response, status) {
+  //Verificar o Status
+  if (status != google.maps.DistanceMatrixStatus.OK)
+      //Se o status não for "OK"
+      $('#litResultado').html(status);
+  else {
+      //Se o status for OK
+      //Endereço de origem = response.originAddresses
+      //Endereço de destino = response.destinationAddresses
+      //Distância = response.rows[0].elements[0].distance.text
+      //Duração = response.rows[0].elements[0].duration.text
+     /* $('#litResultado').html("<strong>Origem</strong>: " + response.originAddresses +
+          "<br /><strong>Destino:</strong> " + response.destinationAddresses +
+          "<br /><strong>Distância</strong>: " + response.rows[0].elements[0].distance.text +
+          " <br /><strong>Duração</strong>: " + response.rows[0].elements[0].duration.text
+      );*/
+      document.getElementById('info-tempo').textContent = response.rows[0].elements[0].duration.text;
+      document.getElementById('info-dist').textContent = response.rows[0].elements[0].distance.text;
+      //alert(response.rows[0].elements[0].distance.text + " " + response.rows[0].elements[0].duration.text);
+    }
+  }
