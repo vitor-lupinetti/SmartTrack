@@ -187,13 +187,20 @@ function addOption(valor, posicao) {
 
 function Buscar(){
   var posicao = document.getElementById("combo-box").value;
+  var bus = document.getElementById("combo-box").options[document.getElementById("combo-box").selectedIndex].text;
   //var itemselecionado = select.options[select.selectedIndex].value;
   var pos = posicao.split(',');
   var pos2 = pos.map(Number);
-  console.log(pos2);
+  console.log(bus);
   var xhr = new XMLHttpRequest();
   //xhr.open("GET", "http://18.221.146.148:1026/v2/entities/urn:ngsi-ld:mobilephone:");
+  if(bus == '431'){
   xhr.open("GET", "http://52.14.14.140:1026/v2/entities/urn:ngsi-ld:431");
+}
+else{
+  alert("Ônibus não cadastrado ainda..");
+  return;
+}
 
   xhr.addEventListener("load", function() {
     var resposta = xhr.responseText;
@@ -208,9 +215,10 @@ function Buscar(){
         map: map
     });
     var request = { // Novo objeto google.maps.DirectionsRequest, contendo:
-      origin:{lat: pos2[0], lng:pos2[1]}, // origem
-      destination:{lat: local[0], lng:local[1]}, // destino
-      travelMode: google.maps.TravelMode.TRANSIT // meio de transporte, nesse caso, de carro
+      origin:{lat: local[0], lng:local[1]}, // origem
+      destination:{lat: pos2[0], lng:pos2[1]},
+      //destination:{lat: local[0], lng:local[1]}, // destino
+      travelMode: google.maps.TravelMode.DRIVING // meio de transporte, nesse caso, de carro
    };
   
    directionsService.route(request, function(result, status) {
