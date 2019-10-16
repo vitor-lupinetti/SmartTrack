@@ -73,7 +73,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     
 function marca1(event) {
   alert("Onibus disponíveis: - 409, 147, 314,431. Por favor selecione um na lista abaixo: ");
-
+  var posicao = [-23.735478, -46.583332];
   //var select = document.querySelector("#combo-box");
   var onibus = [
     '409',
@@ -86,7 +86,7 @@ function marca1(event) {
     select.remove(0);
 }
   onibus.forEach(function(item){
-    addOption(item)
+    addOption(item, posicao)
   });
 
   
@@ -94,7 +94,7 @@ function marca1(event) {
 
 function marca2(event) {
   alert("Onibus disponíveis: - 409, 147, 314,431. Por favor selecione um na lista abaixo: ");
-
+  var posicao = [-23.735265, -46.582529];
   //var select = document.querySelector("#combo-box");
   var onibus = [
     '409',
@@ -106,16 +106,16 @@ function marca2(event) {
   while (select.length) {
     select.remove(0);
 }
-  onibus.forEach(function(item){
-    addOption(item)
-  });
+onibus.forEach(function(item){
+  addOption(item, posicao)
+});
 
   //document.getElementById('esconde').textContent = posicao;
 };
 
 function marca3(event) {
   alert("Onibus disponíveis: -  147, 431. Por favor selecione um na lista abaixo: ");
-
+  var posicao = [-23.735367, -46.580357];
   //var select = document.querySelector("#combo-box");
   var onibus = [
     '147',
@@ -125,16 +125,16 @@ function marca3(event) {
   while (select.length) {
     select.remove(0);
 }
-  onibus.forEach(function(item){
-    addOption(item)
-  });
+onibus.forEach(function(item){
+  addOption(item, posicao)
+});
  
   //document.getElementById('esconde').textContent = posicao;
 };
 
 function marca4(event) {
   alert("Onibus disponíveis: -  147, 431, 195, 314. Por favor selecione um na lista abaixo: ");
-
+  var posicao = [-23.735641, -46.580376];
   //var select = document.querySelector("#combo-box");
   var onibus = [
     '147',
@@ -146,15 +146,15 @@ function marca4(event) {
   while (select.length) {
     select.remove(0);
 }
-  onibus.forEach(function(item){
-    addOption(item)
-  });
+onibus.forEach(function(item){
+  addOption(item, posicao)
+});
 
  // document.getElementById('esconde').textContent = posicao;
 };
 function marca5(event) {
   alert("Onibus disponíveis: -  147, 431, 314. Por favor selecione um na lista abaixo: ");
-
+  var posicao = [-23.734522, -46.579736];
   //var select = document.querySelector("#combo-box");
   var onibus = [
     '147',
@@ -165,18 +165,19 @@ function marca5(event) {
   while (select.length) {
     select.remove(0);
 }
-  onibus.forEach(function(item){
-    addOption(item)
-  });
+onibus.forEach(function(item){
+  addOption(item, posicao)
+});
 
   //document.getElementById('esconde').innerHTML = '-23.734522, -46.579736';
 };
 
-function addOption(valor) {
+function addOption(valor, posicao) {
 
   var select = document.getElementById("combo-box");
-  var option = new Option(valor,valor);
+  var option = new Option(valor,posicao);
   select.add(option);
+  console.log(option);
   document.getElementById('botao2').style.display = 'inline';
   //document.getElementById('tabel').style.display = 'inline';
   //document.getElementById('tabela').style.marginLeft ='32%';
@@ -185,7 +186,11 @@ function addOption(valor) {
 }
 
 function Buscar(){
-
+  var posicao = document.getElementById("combo-box").value;
+  //var itemselecionado = select.options[select.selectedIndex].value;
+  var pos = posicao.split(',');
+  var pos2 = pos.map(Number);
+  console.log(pos2);
   var xhr = new XMLHttpRequest();
   //xhr.open("GET", "http://18.221.146.148:1026/v2/entities/urn:ngsi-ld:mobilephone:");
   xhr.open("GET", "http://52.14.14.140:1026/v2/entities/urn:ngsi-ld:431");
@@ -195,24 +200,26 @@ function Buscar(){
     console.log(resposta);
     console.log(typeof resposta);
     var bus = JSON.parse(resposta);
-    console.log(bus.location.value.coordinates);
+    console.log(typeof bus.location.value.coordinates);
     var local = bus.location.value.coordinates;
     markerbus = new google.maps.Marker({
       position: new google.maps.LatLng(local[0], local[1]),
         title: "Onibus",
         map: map
     });
-   /* var request = { // Novo objeto google.maps.DirectionsRequest, contendo:
-      origin:{lat: posicao[0], lng:posicao[1]}, // origem
-      destination: {lat: local[0], lng:local[1]}, // destino
-      travelMode: google.maps.TravelMode.DRIVING // meio de transporte, nesse caso, de carro
+    var request = { // Novo objeto google.maps.DirectionsRequest, contendo:
+      origin:{lat: pos2[0], lng:pos2[1]}, // origem
+      destination:{lat: local[0], lng:local[1]}, // destino
+      travelMode: google.maps.TravelMode.TRANSIT // meio de transporte, nesse caso, de carro
    };
   
    directionsService.route(request, function(result, status) {
       if (status == google.maps.DirectionsStatus.OK) { // Se deu tudo certo
          directionsDisplay.setDirections(result); // Renderizamos no mapa o resultado
+         //var point = response.routes[ 0 ].legs[ 0 ];
+        // alert(point.duration.text);
       }
-   });*/
+   });
     document.getElementById('info-bus').textContent = "409";
     document.getElementById('info-qtd').textContent = bus.quantidade.value;
   });           
