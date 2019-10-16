@@ -163,3 +163,28 @@ th{
 	margin: auto;
 	margin-top: 50px;
 }
+
+.sobre{
+	text-align: center;
+}
+.sobre h3{
+	text-align: center;
+	font-size: 30px;
+    clear: both;	
+	font-family: "Open Sans Condensed", "Arial", sans-serif;	
+	margin-top: 60px;
+}
+
+.sobre p{
+
+	padding-top: 40px;	
+	font-size: 20px;
+}
+.sobre ul{	
+	padding-top: 30px;
+}
+.sobre li{	
+	padding-bottom: 10px;
+	font-size: 19px;
+	margin:auto;
+}
