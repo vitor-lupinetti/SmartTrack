@@ -19,58 +19,60 @@
         
     </head>
     <body>
-        <header class="sticky-top">
-            <h1 class="titulo-principal">Projeto</h1>
-            <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-                
-        
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-        
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="nav">
-                        <li class="nav-item">
-                        <a href="index.html" class="nav-link trocar_pagina text-light" id="conteudo_tempo_real.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                        <a href="bio.html" class="nav-link trocar_pagina text-light" id="conteudo_consultar.html">Sobre</a>
-                        </li>
-                        <li class="nav-item">
-                        <a href="#" class="nav-link trocar_pagina text-light" id="conteudo_simulador.html">Contato</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        
-        <h2 class="subtitulo">Mapa</h2>
-        <div id="map"></div>
-        <h2 class="select">Selecione seu ônibus na lista abaixo</h2>
-        <select id="combo-box"></select>
-        <button id="botao2" onclick="Buscar()">Buscar</button>
+		<header class="sticky-top">
+			<h1 class="titulo-principal">Projeto</h1>
+			<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+				
+		
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+		
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="nav">
+						<li class="nav-item">
+						<a href="index.html" class="nav-link trocar_pagina text-light" id="conteudo_tempo_real.html">Home</a>
+						</li>
+						<li class="nav-item">
+						<a href="bio.html" class="nav-link trocar_pagina text-light" id="conteudo_consultar.html">Sobre</a>
+						</li>
+						<li class="nav-item">
+						<a href="#" class="nav-link trocar_pagina text-light" id="conteudo_simulador.html">Contato</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+			<h2 class="subtitulo">Mapa</h2>
+			<div id="map"></div>
+			<br/>
+			<div class=" text-center">
+				<h2 >Selecione seu ônibus na lista abaixo</h2>
+			</div>
+			<select id="combo-box"></select>
+				<button id="botao2" onclick="Buscar()">Buscar</button>
 
-        <table id = "tabel">
-            <thead>
-                <tr>
-                    <th>Ônibus</th>
-                    <td id = "info-bus"></td>
-                </tr>
-                <tr>
-                    <th>Distância</th>
-                    <td id="info-dist"></td>
-                </tr>
-                <tr>
-                    <th>Tempo</th>
-                    <td id="info-tempo"></td>
-                </tr>
-                <tr>
-                    <th>Quantidade</th>
-                    <td id="info-qtd"></td>
-                </tr>
-            </thead>
-            
-        </table>
+			<table  id = "tabel">
+				<thead>
+					<tr>
+						<th>Ônibus</th>
+						<td id = "info-bus"></td>
+					</tr>
+					<tr>
+						<th>Distância</th>
+						<td id="info-dist"></td>
+					</tr>
+					<tr>
+						<th>Tempo</th>
+						<td id="info-tempo"></td>
+					</tr>
+					<tr>
+						<th>Quantidade</th>
+						<td id="info-qtd"></td>
+					</tr>
+				</thead>
+				
+			</table>
 
           <!-- Bootstrap JS -->
         <script src="js/jquery-3.3.1.slim.min.js"></script>
