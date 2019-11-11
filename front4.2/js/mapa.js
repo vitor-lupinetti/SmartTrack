@@ -209,15 +209,17 @@ function Buscar(){
     console.log(resposta);
     console.log(typeof resposta);
     var bus = JSON.parse(resposta);
-    console.log(typeof bus.location.value.coordinates);
-    var local = bus.location.value.coordinates;
+    console.log( bus.location.value);
+    var local = bus.location.value.split(',');
+    var local2 = local.map(Number);
+    console.log(local2);
     markerbus = new google.maps.Marker({
-      position: new google.maps.LatLng(local[0], local[1]),
+      position: new google.maps.LatLng(local2[0], local2[1]),
         title: "Onibus",
         map: map
     });
     var request = { // Novo objeto google.maps.DirectionsRequest, contendo:
-      origin:{lat: local[0], lng:local[1]}, // origem
+      origin:{lat: local2[0], lng:local2[1]}, // origem
       destination:{lat: pos2[0], lng:pos2[1]},
       //destination:{lat: local[0], lng:local[1]}, // destino
       travelMode: google.maps.TravelMode.DRIVING // meio de transporte, nesse caso, de carro
@@ -232,7 +234,7 @@ function Buscar(){
    });
     
     document.getElementById('info-qtd').textContent = bus.quantidade.value;
-    CalculaDistancia(pos2, local);
+    CalculaDistancia(pos2, local2);
   });           
   xhr.send(); 
   
