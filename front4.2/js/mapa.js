@@ -281,3 +281,20 @@ function callback(response, status) {
       //alert(response.rows[0].elements[0].distance.text + " " + response.rows[0].elements[0].duration.text);
     }
   }
+
+  function AtualizarDados(){
+    $.ajax({
+      url: "http://52.14.14.140:1026/v2/entities/urn:ngsi-ld:431", //selecionando o endereço que iremos acessar no backend
+      type: 'GET', //selecionando o tipo de requesição, PUT,GET,POST,DELETE
+      sucess: function(){console.log("Sucesso")},//Em caso de sucesso
+      error: function(){//Em caso de erro
+        console.log("Erro");//Exibir o erro no console JS do navegador
+      }
+    }).done(function(resultados){
+       
+
+        document.getElementById('info-qtd').textContent = resultados.quantidade.value;
+
+        console.log(resultados.quantidade.value);
+    });//Fim chamada Ajax
+  }
